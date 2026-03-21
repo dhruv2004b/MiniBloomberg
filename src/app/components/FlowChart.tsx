@@ -51,7 +51,7 @@ export default function FlowChart({ history }: Props) {
               mode: "index",
               callbacks: {
                 label: (ctx) => {
-                  const v = ctx.parsed.y;
+                  const v = ctx.parsed.y ?? 0;
                   return ` ${ctx.dataset.label}: ${v >= 0 ? "+" : ""}${v.toLocaleString("en-IN")} Cr`;
                 },
               },
