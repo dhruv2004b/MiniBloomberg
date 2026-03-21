@@ -65,9 +65,7 @@ export default function Terminal({ initialData }: Props) {
   const [cmdVisible, setCmdVisible] = useState(false);
   const [detail, setDetail]       = useState<SectorData | null>(null);
   const [clock, setClock]         = useState("");
-  // const cmdTimer = useRef<ReturnType<typeof setTimeout>>();
-// AFTER
-  const cmdTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const cmdTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
   // ── Clock ─────────────────────────────────────────────────────────────────
   useEffect(() => {
     const tick = () => {
@@ -105,7 +103,7 @@ export default function Terminal({ initialData }: Props) {
   // ── Command handler ───────────────────────────────────────────────────────
   const showCmd = (msg: string) => {
     setCmdMsg(msg); setCmdVisible(true);
-    clearTimeout(cmdTimer.current);
+    if (cmdTimer.current) clearTimeout(cmdTimer.current);
     cmdTimer.current = setTimeout(() => setCmdVisible(false), 3500);
   };
 
