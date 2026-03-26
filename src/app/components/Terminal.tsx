@@ -515,7 +515,8 @@ export default function Terminal({ initialData }: Props) {
   const [cmdVisible, setCmdVisible] = useState(false);
   const [detail, setDetail]       = useState<SectorData | null>(null);
   const [clock, setClock]         = useState("");
-  const cmdTimer = useRef<ReturnType<typeof setTimeout>>();
+  const cmdTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+
 
   // ── Clock ─────────────────────────────────────────────────────────────────
   useEffect(() => {
@@ -732,7 +733,7 @@ export default function Terminal({ initialData }: Props) {
           <section className={styles.heatmapPanel}>
             <div className={styles.heatmapHeader}>
               <span className={styles.panelTitleInline}>🌡 SECTOR ROTATION HEATMAP</span>
-              <span className={styles.dateLabel}>{data?.date} · {data?.source === "cache" ? "CACHED" : "LIVE"}</span>
+              <span className={styles.dateLabel}>{data?.date} · LIVE</span>
             </div>
             <div className={styles.heatmap} style={{ gridTemplateColumns: `repeat(${Math.min(sectors.length, 5)}, 1fr)` }}>
               {sectors.map(s => (
